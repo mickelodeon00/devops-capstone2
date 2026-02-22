@@ -9,6 +9,8 @@ on:
       - main
     paths:
       - "terraform/**"
+      - ".github/workflows/terraform-infra.yml"
+
   workflow_dispatch:
 
 jobs:
@@ -47,6 +49,6 @@ jobs:
         working-directory: terraform
         run: terraform plan -var="db_password=${{ secrets.DB_PASSWORD }}" -out=tfplan
 
-      # - name: Terraform Apply
-      #   working-directory: terraform
-      #   run: terraform apply -auto-approve tfplan
+      - name: Terraform Apply
+        working-directory: terraform
+        run: terraform apply -auto-approve tfplan
