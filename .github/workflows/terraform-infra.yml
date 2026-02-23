@@ -52,3 +52,7 @@ jobs:
       - name: Terraform Apply
         working-directory: terraform
         run: terraform apply -auto-approve tfplan
+
+      # - name: Terraform Destroy
+      #   working-directory: terraform
+      #   run: terraform destroy -auto-approve -var="db_password=${{ secrets.DB_PASSWORD }}"

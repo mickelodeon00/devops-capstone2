@@ -19,6 +19,16 @@ resource "aws_subnet" "public" {
   tags = { Name = "cap2-public-subnet" }
 }
 
+# Public Subnet 2 — Required by ALB (must span 2 AZs)
+resource "aws_subnet" "public_2" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.4.0/24"
+  availability_zone       = "eu-west-1b"
+  map_public_ip_on_launch = true
+
+  tags = { Name = "cap2-public-subnet-2" }
+}
+
 # Private Subnet — App Server
 resource "aws_subnet" "private" {
   vpc_id                  = aws_vpc.main.id
@@ -84,6 +94,11 @@ resource "aws_route_table" "private" {
 
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "public_2" {
+  subnet_id      = aws_subnet.public_2.id
   route_table_id = aws_route_table.public.id
 }
 
