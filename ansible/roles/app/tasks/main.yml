@@ -1,8 +1,8 @@
 - name: Install Python3, pip and Git
   ansible.builtin.dnf:
     name:
-      - python3
-      - python3-pip
+      - "{{ python_version }}"
+      - "{{ python_version }}-pip"
       - git
     state: present
 
