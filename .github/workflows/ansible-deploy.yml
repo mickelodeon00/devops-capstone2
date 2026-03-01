@@ -2,11 +2,11 @@ name: Ansible Deploy Cap2
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - "ansible/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "ansible/**"
 
 jobs:
   ansible:
