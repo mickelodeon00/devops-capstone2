@@ -36,3 +36,10 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: "False"
         run: ansible-playbook -i inventory/hosts.ini playbook.yml
         working-directory: ansible
+
+      - name: Check app status
+        run: |
+          ansible -i inventory/hosts.ini app -m ansible.builtin.shell -a "systemctl status cap2"
+        working-directory: ansible
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
