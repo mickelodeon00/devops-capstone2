@@ -29,7 +29,7 @@ jobs:
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
         working-directory: ansible
-        run: ansible -i inventory/hosts.ini app -m ansible.builtin.ping
+        run: ansible -i inventories/hosts.ini app -m ansible.builtin.ping
 
       - name: Setup SSH Key
         run: |
@@ -40,10 +40,10 @@ jobs:
       - name: Run Ansible Playbook
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
-        run: ansible-playbook -i inventory/hosts.ini playbook.yml
+        run: ansible-playbook -i inventories/hosts.ini playbook.yml
         working-directory: ansible
 
       - name: Check app status
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
-        run: ansible -i ansible/inventory/hosts.ini app -m ansible.builtin.shell -a "systemctl status cap2"
+        run: ansible -i ansible/inventories/hosts.ini app -m ansible.builtin.shell -a "systemctl status cap2"
