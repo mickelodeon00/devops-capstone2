@@ -1,0 +1,7 @@
+- name: Deploy Cap2 App
+  hosts: app
+  become: true
+  gather_facts: true
+
+  roles:
+    - app
