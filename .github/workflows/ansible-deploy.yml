@@ -25,6 +25,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
 
+      - name: Test Ansible Connection
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        working-directory: ansible
+        run: ansible -i inventory/hosts.ini app -m ansible.builtin.ping
+
       - name: Setup SSH Key
         run: |
           mkdir -p ~/.ssh
