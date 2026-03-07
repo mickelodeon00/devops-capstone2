@@ -29,6 +29,10 @@ jobs:
         working-directory: ansible
         run: ansible-galaxy install -r requirements.yml
 
+      - name: Show CIS defaults
+        working-directory: ansible
+        run: cat roles/AMAZON2023-CIS/defaults/main.yml | grep -i "root\|4_6_6\|password"
+
       - name: Run Hardening Playbook
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
