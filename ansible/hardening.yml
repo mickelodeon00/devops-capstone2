@@ -1,0 +1,8 @@
+- name: CIS Hardening
+  hosts: app
+  become: true
+  gather_facts: true
+
+
+  roles:
+    - AMAZON2023-CIS

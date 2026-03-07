@@ -1,17 +1,11 @@
-name: Ansible Deploy Cap2
+name: Ansible Hardening Cap2
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "ansible/**"
-      - ".github/workflows/ansible-deploy.yml"
 
 jobs:
-  ansible:
-    name: Ansible Deployment
+  hardening:
+    name: CIS Hardening
     runs-on: ubuntu-latest
 
     steps:
@@ -25,26 +19,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
 
-
       - name: Setup SSH Key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/mickey.pem
           chmod 600 ~/.ssh/mickey.pem
 
-      - name: Test Ansible Connection
-        env:
-          ANSIBLE_HOST_KEY_CHECKING: "False"
+      - name: Install CIS Role
         working-directory: ansible
-        run: ansible -i inventories/hosts.ini app -m ansible.builtin.ping
-        
-      - name: Run Ansible Playbook
-        env:
-          ANSIBLE_HOST_KEY_CHECKING: "False"
-        run: ansible-playbook -i inventories/hosts.ini playbook.yml
-        working-directory: ansible
+        run: ansible-galaxy install -r requirements.yml
 
-      # - name: Check app status
-      #   env:
-      #     ANSIBLE_HOST_KEY_CHECKING: "False"
-      #   run: ansible -i inventories/hosts.ini app -m ansible.builtin.shell -a "systemctl status cap2"
+      - name: Run Hardening Playbook
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        working-directory: ansible
+        run: ansible-playbook -i inventories/hosts.ini hardening.yml
