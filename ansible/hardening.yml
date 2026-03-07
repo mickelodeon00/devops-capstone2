@@ -5,7 +5,9 @@
 
 
   vars:
-    amzn2023cis_rule_4_6_6: false
+    amzn2023cis_rule_4_6_6: false # dissable password expiration for root
+    amzn2023cis_rule_1_3_1: false # disable AIDE
+
 
 
   roles:
