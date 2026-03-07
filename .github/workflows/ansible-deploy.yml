@@ -47,4 +47,4 @@ jobs:
       - name: Check app status
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
-        run: ansible -i ansible/inventories/hosts.ini app -m ansible.builtin.shell -a "systemctl status cap2"
+        run: ansible -i inventories/hosts.ini app -m ansible.builtin.shell -a "systemctl status cap2"
