@@ -2,3 +2,9 @@ app_repo: "https://github.com/techbleat/class25-26-project2"
 app_dir: "/opt/cap2"
 app_port: 8000
 python_version: "python3.11"
+
+
+
+# CIS Hardening
+amazon2023cis_set_root_password: true
+amazon2023cis_root_password: "{{ vault_root_password }}"
