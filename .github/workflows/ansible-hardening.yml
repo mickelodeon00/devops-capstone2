@@ -37,4 +37,4 @@ jobs:
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
         working-directory: ansible
-        run: ansible-playbook -i inventories/hosts.ini hardening.yml
+        run: ansible-playbook -i inventories/hosts.ini hardening.yml --tags level1_server
