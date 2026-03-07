@@ -5,7 +5,7 @@
 
 
   vars:
-    amazon2023cis_set_root_password: false
+    amzn2023cis_rule_4_6_6: false
 
 
   roles:
