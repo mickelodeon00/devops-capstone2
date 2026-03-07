@@ -16,7 +16,7 @@
   ansible.builtin.pip:
     requirements: "{{ app_dir }}/requirements.txt"
     virtualenv: "{{ app_dir }}/venv"
-    virtualenv_command: python3 -m venv
+    virtualenv_command: {{ python_version }} -m venv
 
 - name: Deploy systemd service
   ansible.builtin.template:
