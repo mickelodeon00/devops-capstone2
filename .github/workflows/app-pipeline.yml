@@ -1,0 +1,42 @@
+name: App Security Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/app-pipeline.yml"
+
+jobs:
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Clone App Repo
+        run: git clone https://github.com/techbleat/class25-26-project2 project
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          pip install bandit pip-audit
+          pip install -r project/requirements.txt
+
+      - name: SAST — Bandit
+        run: bandit -r project/
+
+      - name: Dependency Scan — pip-audit
+        run: pip-audit -r project/requirements.txt
+
+      - name: Secrets Scan — Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
