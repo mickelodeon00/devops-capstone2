@@ -4,8 +4,8 @@
   gather_facts: true
 
 
-  vars:
-    amazon2023cis_rule_4_6_6: false
+  # vars:
+  #   amazon2023cis_rule_4_6_6: false
 
 
   roles:

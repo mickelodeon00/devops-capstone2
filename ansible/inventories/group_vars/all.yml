@@ -6,5 +6,7 @@ python_version: "python3.11"
 
 
 # CIS Hardening
-amazon2023cis_set_root_password: true
-amazon2023cis_root_password: "{{ vault_root_password }}"
+# amazon2023cis_set_root_password: true
+# amazon2023cis_root_password: "{{ vault_root_password }}"
+
+amazon2023cis_rule_4_6_6: false
